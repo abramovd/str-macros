@@ -3,9 +3,9 @@ import re
 
 class MacrosMixin(object):
     """
-    Use macros for your model.CharField.
+    Use macros for your str attribute or model.CharField in Django.
     All macro labels should be inside of [], e.g.,
-    [rb-mail-banner_id].
+    [banner_id].
 
     MACRO_FIELDS - tuple of fields for which macros should
     be checked
@@ -15,7 +15,7 @@ class MacrosMixin(object):
         is an object of your class for which macros are enabled.
         Patterns in MACRO_MAP should be defines without []
         E.g. MACRO_MAP = {
-            'rb_mail-banner_id':
+            'banner_id':
                 lambda self: str(self.banner_id)
             }
     """
