@@ -123,7 +123,7 @@ in an infinite recursion, so - don't make such mistakes. Example of such mistage
 
 ### Basic usage
 
-By default, macros are disables. So:
+By default, macros are disabled. So:
 
 ```python
 campaign = AdCampaign(1, 'test campaign')
@@ -154,6 +154,8 @@ print(AdBanner.is_macros_enabled()) # False
 ### Using context manager
 ```python
 from str_macros import enabled_macros
+
+
 AdBanner.is_macros_enabled() # False
 with enabled_macros(AdBanner):
     # macros are enabled here
