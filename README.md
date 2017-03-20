@@ -54,12 +54,12 @@ campaign = AdCampaign(1, 'test campaign')
 banner = AdBanner(
     id=1,
     name='banner [banner_id] for campaign [campaign_name] [random]',
-    url='http://test.ru/?utm_name=[banner_name]',
+    url='http://test.ru/?utm_id=[banner_id]',
     campaign=campaign
 )
 ```
 So, we have four macros here:
-```[banner_id], [campaign_name], [banner_name], [random]``` and we
+```[banner_id], [campaign_name], [banner_id], [random]``` and we
 want to enable them when we create it and send info to Google.
 
 ## Usage
@@ -79,8 +79,8 @@ class AdBanner(MacrosMixin):
     
     MACRO_MAP = {
         'banner_id': lambda self: str(self.ad_id),
+        'campaign_id': lambda self: str(self.campaign.id),
         'campaign_name': lambda self: self.campaign.name,
-        'banner_name': lambda self: self.name,
         'random': lambda self: str(random.randint(1, 100)),
     }
 
@@ -111,14 +111,14 @@ field which is specified in MACRO_FIELDS you are going to end up
 in an infinite recursion, so - don't make such mistakes. Example of such mistage:
 
 ```python
-    MACRO_FIELDS = (
-        'name', 'url'
-    )
-    MACRO_MAP = {
-        'banner_name': lambda self: self.name
-        # Danger!
-        # if you have pattern [banner_name] in name - infinite recursion
-    }
+MACRO_FIELDS = (
+    'name', 'url'
+)
+MACRO_MAP = {
+    'banner_name': lambda self: self.name
+    # Danger!
+    # if you have pattern [banner_name] in name - infinite recursion
+}
  ```
 
 ### Basic usage
@@ -130,7 +130,7 @@ campaign = AdCampaign(1, 'test campaign')
 banner = AdBanner(
     id=1,
     name='banner [banner_id] for campaign [campaign_name] [random]',
-    url='http://test.ru/?utm_name=[banner_name]',
+    url='http://test.ru/?utm_id=[banner_id]',
     campaign=campaign
 )
 
