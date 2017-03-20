@@ -58,8 +58,8 @@ banner = AdBanner(
     campaign=campaign
 )
 ```
-So, we have four macros here:
-```[banner_id], [campaign_name], [banner_id], [random]``` and we
+So, we have three macros here:
+```[banner_id], [campaign_name], [random]``` and we
 want to enable them when we create it and send info to Google.
 
 ## Usage
